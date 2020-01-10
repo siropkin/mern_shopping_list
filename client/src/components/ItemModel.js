@@ -32,7 +32,6 @@ class ItemModel extends Component {
     e.preventDefault();
 
     const newItem = {
-      id: 'saadada',
       name: this.state.name
     };
 
