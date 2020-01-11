@@ -1,27 +1,26 @@
 const express = require('express');
 const { connect } = require('mongoose');
-const bodyParser = require('body-parser');
-const { mongodbUri } = require('./config/key');
 const { now } = require('./utils');
 const path = require('path');
-
-const items = require('./routes/api/v1/items');
+const config = require('config');
 
 const app = express();
-
-// BodyParser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Connect to MongoDB
+const mongodbUri = config.get('mongodbUri');
 connect(mongodbUri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 })
   .then(() => console.log(`${ now() } MongoDB connected`))
   .catch(err => console.log(`${ now() } MongoDB connection error : ${ err }`));
 
 // Use Routes
-app.use('/api/items', items);
+app.use('/api/items', require('./routes/api/v1/items'));
+app.use('/api/users', require('./routes/api/v1/users'));
+app.use('/api/auth', require('./routes/api/v1/auth'));
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

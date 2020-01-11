@@ -7,7 +7,7 @@ const ItemSchema = new Schema({
     required: [true, 'Item name required.'],
     trim: true
   },
-  date: {
+  add_date: {
     type: Date,
     default: Date.now
   }
