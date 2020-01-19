@@ -12,14 +12,13 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { register } from "../../actions/authActions";
+import { login } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorsActions";
 
 
-class RegisterModal extends Component {
+class SignInModal extends Component {
   state = {
     modal: false,
-    name: '',
     email: '',
     password: '',
     msg: null
@@ -28,7 +27,7 @@ class RegisterModal extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    register: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
 
@@ -36,7 +35,7 @@ class RegisterModal extends Component {
     const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === 'REGISTER_FAIL') {
+      if (error.id === 'LOGIN_FAIL') {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null })
@@ -64,39 +63,30 @@ class RegisterModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, password} = this.state;
+    const { email, password } = this.state;
 
-    // Create user object
-    const newUser = { name, email, password };
+    const user = { email, password };
 
-    // Attempt to register
-    this.props.register(newUser);
+    // Attempt to login
+    this.props.login(user);
   };
 
   render() {
     return(
       <div>
         <NavLink onClick={this.toggle} href={"#"}>
-          Sign up
+          Sign in
         </NavLink>
 
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
         >
-          <ModalHeader toggle={this.toggle}>Sign up</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Sign in</ModalHeader>
           <ModalBody>
             { this.state.msg ? <Alert color={"danger"}>{ this.state.msg }</Alert> : null }
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Input
-                  className={"mb-2"}
-                  type={"text"}
-                  name={"name"}
-                  id={"name"}
-                  placeholder={"Name"}
-                  onChange={this.onChange}
-                />
 
                 <Input
                   className={"mb-2"}
@@ -119,7 +109,7 @@ class RegisterModal extends Component {
                   color={"dark"}
                   style={{marginTop: '2rem'}}
                   block
-                >Sign up</Button>
+                >Sign in</Button>
               </FormGroup>
             </Form>
           </ModalBody>
@@ -137,5 +127,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { register, clearErrors }
-)(RegisterModal);
+  { login, clearErrors }
+)(SignInModal);

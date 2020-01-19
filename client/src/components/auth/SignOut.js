@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
 import PropTypes from 'prop-types';
 
-export class Logout extends Component {
+export class SignOut extends Component {
   static propTypes = {
     logout: PropTypes.func.isRequired
   };
@@ -12,7 +12,7 @@ export class Logout extends Component {
   render() {
     return (
       <Fragment>
-        <NavLink onClick={this.props.logout} href={"#"}>Logout</NavLink>
+        <NavLink onClick={this.props.logout} href={"#"}>Sign out</NavLink>
       </Fragment>
     )
   }
@@ -20,4 +20,4 @@ export class Logout extends Component {
 
 export default connect(
   null, { logout })
-(Logout);
+(SignOut);
