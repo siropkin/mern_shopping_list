@@ -6,13 +6,12 @@ import {
   ModalBody,
   Form,
   FormGroup,
-  Label,
   Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 
-class ItemModel extends Component {
+class ItemModal extends Component {
   state = {
     modal: false,
     name: ''
@@ -58,14 +57,13 @@ class ItemModel extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for={"item"}>Item</Label>
                 <Input
                   type={"text"}
                   name={"name"}
                   id={"items"}
-                  placeholder={"Add shopping item"}
+                  placeholder={"Item name"}
                   onChange={this.onChange}
-                ></Input>
+                />
                 <Button
                   color={"dark"}
                   style={{marginTop: '2rem'}}
@@ -88,4 +86,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { addItem }
-  )(ItemModel);
+  )(ItemModal);

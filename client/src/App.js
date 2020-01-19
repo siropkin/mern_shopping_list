@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import AppNavbar from "./components/AppNavbar";
 import ShoppingList from "./components/ShoppingList";
-import ItemModel from "./components/ItemModel";
+import ItemModel from "./components/ItemModal";
 import { Container } from 'reactstrap';
 
 import { Provider } from 'react-redux';
@@ -29,6 +29,6 @@ class App extends Component {
       </Provider>
     );
   }
-};
+}
 
 export default App;

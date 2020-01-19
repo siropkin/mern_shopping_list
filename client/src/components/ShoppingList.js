@@ -39,7 +39,7 @@ class ShoppingList extends Component {
       </Container>
     );
   };
-};
+}
 
 ShoppingList.propTypes = {
   getItems: PropTypes.func.isRequired,
